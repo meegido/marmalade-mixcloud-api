@@ -34,6 +34,10 @@ class App extends Component {
     this.widget.togglePlay();
   }
 
+  playMix = mixname => {
+   this.widget.load(mixname, true);
+  }
+
   render() {
     return(
     <Router>
@@ -47,6 +51,10 @@ class App extends Component {
             {/* Routed Pages */}
             <div>
               <button onClick={this.togglePlay}>Play/Pause</button>
+            </div>
+
+            <div>
+              <button onClick={() => this.playMix('/TheVinylFactory/vf-live-zudrangma-records-2/')}>PlayMix</button>
             </div>
             <Route>
               <Home exact path="/"/>
