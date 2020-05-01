@@ -19,13 +19,19 @@ class App extends Component {
   }
 
   mountAudio = async () => {
-     this.widget = Mixcloud.PlayerWidget(this.player.current);
+    this.widget = Mixcloud.PlayerWidget(this.player.current);
     await this.widget.ready;
+    await this.widget.play();
     console.log(this.widget)
   }
 
   componentDidMount() {
     this.mountAudio()
+  }
+
+  togglePlay = () => {
+    console.log('togglePlay')
+    this.widget.togglePlay();
   }
 
   render() {
@@ -39,8 +45,11 @@ class App extends Component {
             {/* Header */}
             <Header/>
             {/* Routed Pages */}
-            <Route exact path="/">
-              <Home />
+            <div>
+              <button onClick={this.togglePlay}>Play/Pause</button>
+            </div>
+            <Route>
+              <Home exact path="/"/>
             </Route>
              <Route path="/archive">
               <Archive />
