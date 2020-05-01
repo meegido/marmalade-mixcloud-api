@@ -7,13 +7,18 @@ import {
 
 import FeaturedMix from './FeaturedMix';
 import Header from './Header';
+import Home from './Home';
 
-const Home = () => <h1>Home</h1>
+
 const Archive = () => <h1>Archive</h1>
 const About = () => <h1>About</h1>
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+        playing: false,
+        currentMix: ''
+      }
 
     this.player = React.createRef();
   }
@@ -21,7 +26,18 @@ class App extends Component {
   mountAudio = async () => {
     this.widget = Mixcloud.PlayerWidget(this.player.current);
     await this.widget.ready;
-    await this.widget.play();
+
+     this.widget.events.pause.on(() =>
+      this.setState({
+        playing: false,
+      })
+    );
+
+    this.widget.events.play.on(() =>
+      this.setState({
+        playing: true,
+      })
+    );
     console.log(this.widget)
   }
 
@@ -30,12 +46,14 @@ class App extends Component {
   }
 
   togglePlay = () => {
-    console.log('togglePlay')
     this.widget.togglePlay();
   }
 
-  playMix = mixname => {
-   this.widget.load(mixname, true);
+  playMix = mixName => {
+    this.setState({
+      currentMix: mixName,
+    });
+    this.widget.load(mixName, true);
   }
 
   render() {
@@ -49,16 +67,24 @@ class App extends Component {
             {/* Header */}
             <Header/>
             {/* Routed Pages */}
-            <div>
-              <button onClick={this.togglePlay}>Play/Pause</button>
+            {/* <div>
+              <button onClick={this.togglePlay}>
+                {this.state.playing ? 'Pause' : 'Play'}
+              </button>
             </div>
 
             <div>
-              <button onClick={() => this.playMix('/TheVinylFactory/vf-live-zudrangma-records-2/')}>PlayMix</button>
-            </div>
-            <Route>
-              <Home exact path="/"/>
-            </Route>
+              <h1>currently playing: {this.state.currentMix}</h1>
+              <button 
+                onClick={() => this.playMix('/TheVinylFactory/vf-live-zudrangma-records-2/')}>
+                Play Live zudrangma
+              </button>
+               <button 
+                onClick={() => this.playMix('/TheVinylFactory/vf-live-joakim/')}>
+                Play Live joakim
+              </button>
+            </div> */}
+            <Route exact path="/" ><Home /></Route>
              <Route path="/archive">
               <Archive />
             </Route>
@@ -76,7 +102,7 @@ class App extends Component {
               frameBorder="0" 
               className="db fixed bottom-0 z-5"
               ref={this.player} 
-              />
+            />
         </div>
       </div>
     </Router>
