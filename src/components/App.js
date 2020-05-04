@@ -101,7 +101,7 @@ class App extends Component {
               <Archive {...this.state} {...this.actions}/>
             </Route>
             <Route path="/about">
-              <About />
+              <About {...this.state}/>
             </Route>
           </div>
         </div>

@@ -6,9 +6,9 @@ const Stat = ({statName, statNumber, statWord}) => (
     <div className="f6 biryani ttu">{statName}</div>
     <div className="f5 biryani-black ttu tracked">{statNumber} {statWord}</div>
   </div>
-)
+);
 
-const About = () => (
+const About = ({mixes}) => (
   <div className="ph3 ph4-l">
     <div className="measure center lh-copy f4 ph3">
       <p className="mt0"> Marmalade.fm features the latest and greatest in grooves, beats and world music.</p>
@@ -19,9 +19,9 @@ const About = () => (
     </div>
 
     <div className="flex pt3">
-      <Stat statName="Featuring" statNumber={11} statWord="mixes"/>
-      <Stat statName="Played" statNumber={114476} statWord="times"/>
-      <Stat statName="Width..." statNumber={64851 / 60} statWord="seconds"/>
+      <Stat statName="Featuring" statNumber={mixes.length} statWord="mixes"/>
+      <Stat statName="Played" statNumber={mixes.reduce((accumulator, current) => accumulator + current.play_count, 0)} statWord="times"/>
+      <Stat statName="Width..." statNumber={mixes.reduce((accumulator, current) => accumulator + current.audio_length, 0)} statWord="seconds"/>
     </div>
   </div>
 )
