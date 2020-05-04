@@ -8,10 +8,10 @@ import {
 import FeaturedMix from './FeaturedMix';
 import Header from './Header';
 import Home from './Home';
+import Archive from './Archive';
 
 import mixesData from '../data/mixes';
 
-const Archive = () => <h1>Archive</h1>
 const About = () => <h1>About</h1>
 class App extends Component {
   constructor(props) {
@@ -98,7 +98,7 @@ class App extends Component {
               <Home {...this.state} {...this.actions}/>
             </Route>
              <Route path="/archive">
-              <Archive />
+              <Archive {...this.state} {...this.actions}/>
             </Route>
             <Route path="/about">
               <About />
