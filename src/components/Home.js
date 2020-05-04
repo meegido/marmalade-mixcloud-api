@@ -1,10 +1,11 @@
 import React from 'react';
 import Mix from './Mix';
 
-const Home = () => 
+const Home = props => 
 <div className='flex flex-wrap justify-between mixes ph3 ph4-1'>
+ 
   <div className='mix mb4'>
-    <Mix name="Juan Falibene"/>
+    <Mix name="Juan Falibene" {...props}/>
   </div>
 </div>
 

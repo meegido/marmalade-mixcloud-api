@@ -42,19 +42,20 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.mountAudio()
+    this.mountAudio();    
   }
 
-  togglePlay = () => {
-    this.widget.togglePlay();
-  }
-
-  playMix = mixName => {
-    this.setState({
-      currentMix: mixName,
-    });
-    this.widget.load(mixName, true);
-  }
+  actions = {
+    togglePlay: () => {
+      this.widget.togglePlay();
+    },
+    playMix: mixName => {
+      this.setState({
+        currentMix: mixName,
+      });
+      this.widget.load(mixName, true);
+    }
+  };
 
   render() {
     return(
@@ -67,24 +68,9 @@ class App extends Component {
             {/* Header */}
             <Header/>
             {/* Routed Pages */}
-            {/* <div>
-              <button onClick={this.togglePlay}>
-                {this.state.playing ? 'Pause' : 'Play'}
-              </button>
-            </div>
-
-            <div>
-              <h1>currently playing: {this.state.currentMix}</h1>
-              <button 
-                onClick={() => this.playMix('/TheVinylFactory/vf-live-zudrangma-records-2/')}>
-                Play Live zudrangma
-              </button>
-               <button 
-                onClick={() => this.playMix('/TheVinylFactory/vf-live-joakim/')}>
-                Play Live joakim
-              </button>
-            </div> */}
-            <Route exact path="/" ><Home /></Route>
+            <Route exact path="/" >
+              <Home {...this.state} {...this.actions}/>
+            </Route>
              <Route path="/archive">
               <Archive />
             </Route>
