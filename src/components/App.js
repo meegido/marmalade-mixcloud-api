@@ -9,6 +9,7 @@ import FeaturedMix from './FeaturedMix';
 import Header from './Header';
 import Home from './Home';
 
+import mixesData from '../data/mixes';
 
 const Archive = () => <h1>Archive</h1>
 const About = () => <h1>About</h1>
@@ -18,22 +19,29 @@ class App extends Component {
     this.state = {
         playing: false,
         currentMix: '',
+        mixIds: mixesData,
         mix: null,
+        mixes: []
       }
 
     this.player = React.createRef();
   }
 
   fetchMixes = async () => {
-    try {
-      const response = await fetch('https://api.mixcloud.com/TheVinylFactory/vf-live-zudrangma-records-2/');
-      const data = await response.json();
-      this.setState({
-        mix: data
-      })
-    } catch (error) {
-      console.log(error)
-    }
+    const {mixIds} = this.state;
+
+    mixIds.map(async id => {
+      try {
+        const response = await fetch(`https://api.mixcloud.com${id}`);
+        const data = await response.json();
+        console.log(data)
+        this.setState((prevState, props) => ({
+          mixes: [...prevState.mixes, data]
+        }))
+      } catch (error) {
+        console.log(error)
+      }
+    });
   }
 
   mountAudio = async () => {
@@ -51,7 +59,6 @@ class App extends Component {
         playing: true,
       })
     );
-    console.log(this.widget)
   }
 
   componentDidMount() {
