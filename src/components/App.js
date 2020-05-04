@@ -17,10 +17,23 @@ class App extends Component {
     super(props);
     this.state = {
         playing: false,
-        currentMix: ''
+        currentMix: '',
+        mix: null,
       }
 
     this.player = React.createRef();
+  }
+
+  fetchMixes = async () => {
+    try {
+      const response = await fetch('https://api.mixcloud.com/TheVinylFactory/vf-live-zudrangma-records-2/');
+      const data = await response.json();
+      this.setState({
+        mix: data
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   mountAudio = async () => {
@@ -43,6 +56,7 @@ class App extends Component {
 
   componentDidMount() {
     this.mountAudio();  
+    this.fetchMixes();
   }
 
   actions = {
@@ -50,6 +64,10 @@ class App extends Component {
       this.widget.togglePlay();
     },
     playMix: mixName => {
+      const {currentMix} = this.state;
+      if (mixName === currentMix) {
+        return this.widget.togglePlay();
+      } 
       this.setState({
         currentMix: mixName,
       });
@@ -88,6 +106,7 @@ class App extends Component {
             frameBorder="0" 
             className="db fixed bottom-0 z-5"
             ref={this.player} 
+            enablejsapi="1"
           />
         </div>
       </div>
