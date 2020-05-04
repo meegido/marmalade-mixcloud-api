@@ -83,12 +83,13 @@ class App extends Component {
   };
 
   render() {
+    const [firstMix = {}] = this.state.mixes;
     return(
     <Router>
       <div>
         <div className="flex-l justify-end">
           {/* FeaturedMix */}
-          <FeaturedMix />
+          <FeaturedMix {...this.state} {...this.actions} {...firstMix} id={firstMix.key}/>
           <div className="w-50-l relative z-1">
             {/* Header */}
             <Header/>
