@@ -2,6 +2,7 @@ body {
   font-family: -apple-system, sans-serif;
   font-size: 1rem;
   line-height: 1.5;
+  color: #5c5c5c;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -89,4 +90,12 @@ body {
   width: 100%;
   height: 100%;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+}
+
+.organge {
+  color: #fd9427;
+}
+
+.lh-1 {
+  line-height: 1;
 }

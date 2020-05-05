@@ -1,26 +1,28 @@
 import React from 'react';
-
+import Counter from './Counter';
 
 const Stat = ({statName, statNumber, statWord}) => (
-  <div className="w-third tc pa3 ba bw2 b--light-gray" style={{marginRight: -2}}>
-    <div className="f6 biryani ttu">{statName}</div>
-    <div className="f5 biryani-black ttu tracked">{statNumber} {statWord}</div>
+  <div className="mb4" style={{marginRight: -2}}>
+    <div className="f5 black m0 b">{statName}</div>
+      <Counter end={statNumber} duration={3} />
+      <div className="f4 lh-1">{statWord}
+    </div>
   </div>
 );
 
 const About = ({mixes}) => (
-  <div className="ph3 ph4-l">
-    <div className="measure center lh-copy f4 ph3">
+  <div className="measure center">
+    <div className="lh-copy mb4">
       <p className="mt0"> Marmalade.fm features the latest and greatest in grooves, beats and world music.</p>
-      <p className="mb4">
+      <p className="">
         Whether you’re into hip hop, trip hop, classic jazz, fusion jazz, afro beat or break beat…
         we have you covered!
       </p>
     </div>
 
-    <div className="flex pt3">
-      <Stat statName="Featuring" statNumber={mixes.length} statWord="mixes"/>
-      <Stat statName="Played" statNumber={mixes.reduce((accumulator, current) => accumulator + current.play_count, 0)} statWord="times"/>
+    <div className="">
+      <Stat statName="Featuring..." statNumber={mixes.length} statWord="mixes"/>
+      <Stat statName="Played..." statNumber={mixes.reduce((accumulator, current) => accumulator + current.play_count, 0)} statWord="times"/>
       <Stat statName="Width..." statNumber={mixes.reduce((accumulator, current) => accumulator + current.audio_length, 0)} statWord="seconds"/>
     </div>
   </div>
