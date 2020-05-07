@@ -10,8 +10,10 @@ import Header from './Header';
 import Home from './Home';
 import Archive from './Archive';
 import About from './About';
+import Show from './Show';
 
 import mixesData from '../data/mixes';
+import mixes from '../data/mixes';
 
 class App extends Component {
   constructor(props) {
@@ -103,6 +105,9 @@ class App extends Component {
             <Route path="/about">
               <About {...this.state}/>
             </Route>
+             <Route path="/show/:slug" render={routeParams => (
+               <Show {...this.state} {...routeParams}/>
+             )} />
           </div>
         </div>
         <div>
