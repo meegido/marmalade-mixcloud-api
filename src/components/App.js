@@ -36,7 +36,7 @@ class App extends Component {
       try {
         const response = await fetch(`https://api.mixcloud.com${id}`);
         const data = await response.json();
-        console.log(data)
+
         this.setState((prevState, props) => ({
           mixes: [...prevState.mixes, data]
         }))
