@@ -2,12 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux'
-import store from './redux/store'
+import { createStore } from 'redux';
 
 import 'tachyons';
 import './css/main.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
+
+
+import mixesApp from './store/index';
+
+const store = createStore(
+  mixesApp,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 const Root = () => (
   <Provider store={store}>
@@ -20,14 +28,6 @@ const Root = () => (
 ReactDOM.render(<Root/>,
   document.getElementById('root')
 );
-
-// const rootElement = document.getElementById('root')
-// ReactDOM.render(
-//   <Provider store={store}>
-//     <TodoApp />
-//   </Provider>,
-//   rootElement
-// )
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
