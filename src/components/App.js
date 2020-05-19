@@ -92,18 +92,14 @@ class App extends Component {
             {/* Header */}
             <Header/>
             {/* Routed Pages */}
-            <Route exact path="/" >
-              <Home />
+            <Route exact path="/" ><Home /></Route>
+            <Route path="/archive"><Archive /></Route>
+            <Route path="/about"><About />
+              {/* <Route path="/show/:slug" render={routeParams => ( <Show {...this.state} {...routeParams}/>)} /> */}
+              
             </Route>
-             <Route path="/archive">
-              <Archive />
-            </Route>
-            <Route path="/about">
-              <About {...this.state}/>
-            </Route>
-             <Route path="/show/:slug" render={routeParams => (
-               <Show {...this.state} {...routeParams}/>
-             )} />
+            <Route><Show/></Route>
+            
           </div>
         </div>
         <div>
