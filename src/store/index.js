@@ -1,6 +1,6 @@
 const initialState = {
   mixes: [],
-  currentMix: []
+  currentMix: 'groovie disco'
 }
 
 const mixesApp = (state = initialState, action) => {
