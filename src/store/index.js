@@ -4,16 +4,17 @@ const initialState = {
 }
 
 const mixesApp = (state = initialState, action) => {
-  switch (action.type) {
+const { type, payload } = action;
+  switch (type) {
     case 'SET_MIX':
       return {
         ...state,
-        currentMix: action.payload
+        currentMix: payload
       }
     case 'ADD_MIX':
       return {
         ...state,
-        mixes: [...state.mixes, action.payload]
+        mixes: [...state.mixes, {...payload, id: payload.key}]
       }
     default:
       return state;

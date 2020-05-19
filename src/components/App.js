@@ -4,6 +4,8 @@ import {
   BrowserRouter as Router,
   Route
 } from "react-router-dom";
+import { connect } from 'react-redux';
+
 
 import FeaturedMix from './FeaturedMix';
 import Header from './Header';
@@ -13,33 +15,27 @@ import About from './About';
 import Show from './Show';
 
 import mixesData from '../data/mixes';
-import mixes from '../data/mixes';
-
+import actions from '../store/actions';
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
         playing: false,
         currentMix: '',
-        mixIds: mixesData,
-        mix: null,
-        mixes: []
+        mix: null
       }
 
     this.player = React.createRef();
   }
 
   fetchMixes = async () => {
-    const {mixIds} = this.state;
-
-    mixIds.map(async id => {
+    const {addMix} = this.props;
+    mixesData.map(async id => {
       try {
         const response = await fetch(`https://api.mixcloud.com${id}`);
         const data = await response.json();
+        addMix(data);
 
-        this.setState((prevState, props) => ({
-          mixes: [...prevState.mixes, data]
-        }))
       } catch (error) {
         console.log(error)
       }
@@ -85,7 +81,7 @@ class App extends Component {
   };
 
   render() {
-    const [firstMix = {}] = this.state.mixes;
+    const [firstMix = {}] = this.props.mixes;
     return(
     <Router>
       <div>
@@ -97,10 +93,10 @@ class App extends Component {
             <Header/>
             {/* Routed Pages */}
             <Route exact path="/" >
-              <Home {...this.state} {...this.actions}/>
+              <Home />
             </Route>
              <Route path="/archive">
-              <Archive {...this.state} {...this.actions}/>
+              <Archive />
             </Route>
             <Route path="/about">
               <About {...this.state}/>
@@ -128,4 +124,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(state => state, actions)(App);
