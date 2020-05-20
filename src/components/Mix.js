@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PlayButton from './PlayButton';
-import PlayMix from './PlayMix';
-import {Link} from 'react-router-dom';
+
 
 const Mix = ({name, pictures, slug, ...props}) => (
   <div 

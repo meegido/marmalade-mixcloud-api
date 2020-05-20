@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router'; 
 
 import differenceInDays from 'date-fns/differenceInDays';
 import parseISO from 'date-fns/parseISO'
@@ -18,7 +19,7 @@ const Tags = ({tags = []}) => (
     {tags.map(tag => <Tag {...tag} />)}
   </div>
 )
-const Show = ({ mix }) => (
+const Show = ({ mix, params }) => (
   <div className="ph3 ph4-l pad-bottom">
     <div className="measure center lh-copy">
       <Tags tags={mix.tags}/>
@@ -40,12 +41,11 @@ const getMix = (mixes, slug) => {
   return mix;
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  mix: getMix(state.mixes, ownProps.match.params.slug),
-})
+const mapStateToProps = (state, params) => ({
+  mix: getMix(
+    state.mixes, 
+    params.slug 
+  ),
+});
 
-const mapDispatchToProps = (ownProps) => ({
-  params: ownProps.match.params.slug,
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Show);
+export default withRouter(connect(mapStateToProps)(Show));

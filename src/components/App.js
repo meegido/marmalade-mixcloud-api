@@ -1,5 +1,5 @@
 /* global Mixcloud*/
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route
@@ -96,9 +96,9 @@ class App extends Component {
             <Route path="/archive"><Archive /></Route>
             <Route path="/about"><About />
               {/* <Route path="/show/:slug" render={routeParams => ( <Show {...this.state} {...routeParams}/>)} /> */}
-              
             </Route>
-            <Route><Show/></Route>
+            <Route path="/show/:slug"><Show /></Route>
+            
             
           </div>
         </div>
